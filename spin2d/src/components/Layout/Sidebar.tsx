@@ -3,9 +3,8 @@ import { FiHome, FiMapPin, FiImage, FiColumns, FiChevronLeft, FiChevronRight } f
 import { useStore } from '../../store/useStore';
 import { TabMode } from '../../types';
 import { FilterPanel } from '../Filters';
-import { ResultsPanel } from '../Results';
+import { ResultsPanel, ApartmentDetail } from '../Results';
 import { CompareButton } from '../Comparison';
-import { ViewModeButtons } from '../Viewer';
 
 interface SidebarProps {
   className?: string;
@@ -90,15 +89,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
       {/* Tab content */}
       {tabMode === 'apartments' && (
         <div className="flex-1 flex flex-col overflow-hidden">
-          {/* View mode buttons (when apartment selected) */}
+          {/* Apartment detail (when selected) */}
           {selectedApartmentId && (
-            <div className="p-4 border-b border-gray-200">
-              <ViewModeButtons />
-            </div>
+            <ApartmentDetail />
           )}
           
           {/* Filters */}
-          <FilterPanel />
+          {!selectedApartmentId && <FilterPanel />}
           
           {/* Results */}
           <div className="flex-1 overflow-hidden">
